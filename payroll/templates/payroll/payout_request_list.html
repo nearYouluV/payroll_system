@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Payout Requests{% endblock %}
+
+{% block content %}
+    <h1>Payout Requests</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>
+                    <a href="{% url 'payout_request_list' %}?sort_by=amount&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}" class="text-decoration-none text-dark">
+                        Amount (USD)
+                        {% if request.GET.sort_by == 'amount' %}
+                            {% if request.GET.order == 'asc' %}
+                                <i class="bi bi-arrow-up ms-2"></i>  <!-- Ascending arrow -->
+                            {% else %}
+                                <i class="bi bi-arrow-down ms-2"></i>  <!-- Descending arrow -->
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                <th>
+                    <a href="{% url 'payout_request_list' %}?sort_by=requested_at&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}" class="text-decoration-none text-dark">
+                        Requested At
+                        {% if request.GET.sort_by == 'requested_at' %}
+                            {% if request.GET.order == 'asc' %}
+                                <i class="bi bi-arrow-up ms-2"></i>  <!-- Ascending arrow -->
+                            {% else %}
+                                <i class="bi bi-arrow-down ms-2"></i>  <!-- Descending arrow -->
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payout_request in payout_requests %}
+                <tr>
+                    <td>{{ payout_request.employee }}</td>
+                    <td>{{ payout_request.amount }} USD</td>
+                    <td>{{ payout_request.requested_at }}</td>
+                    <td>{{ payout_request.status }}</td>
+                    <td>
+                        {% if is_accountant %}
+                        <form method="post" action="{% url 'process_payout_request' pk=payout_request.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Pay</button>
+                        </form>
+                        {%endif%}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No payout requests available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

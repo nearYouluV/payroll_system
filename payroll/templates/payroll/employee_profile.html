@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+    <h1>My Profile</h1>
+    <p><strong>Name:</strong> {{ employee.first_name }} {{ employee.last_name }}</p>
+    <p><strong>Position:</strong> {{ employee.position }}</p>
+    <p><strong>Available Earnings:</strong> {{ employee.available_earnings }} USD</p>
+    <p><strong>Pending amount:</strong> {{ total_pending_amount|floatformat:2 }} USD</p>
+
+    <h2>Request a Payout</h2>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        {% if form.amount.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.amount.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

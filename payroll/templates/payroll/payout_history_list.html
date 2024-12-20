@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Payout History{% endblock %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Employee
+            </th>
+            <th>
+                <a href="{% url 'payout_history_list' %}?sort_by=amount&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}" class="text-decoration-none text-dark">
+                    Amount (USD)
+                    {% if request.GET.sort_by == 'amount' %}
+                        {% if request.GET.order == 'asc' %}
+                            <i class="bi bi-arrow-up ms-2"></i>
+                        {% else %}
+                            <i class="bi bi-arrow-down ms-2"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="{% url 'payout_history_list' %}?sort_by=requested_at&order={% if request.GET.order == 'asc' %}desc{% else %}asc{% endif %}" class="text-decoration-none text-dark">
+                    Processed At
+                    {% if request.GET.sort_by == 'requested_at' %}
+                        {% if request.GET.order == 'asc' %}
+                            <i class="bi bi-arrow-up ms-2"></i>
+                        {% else %}
+                            <i class="bi bi-arrow-down ms-2"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    {% endif %}
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payout in payout_history %}
+            <tr>
+                <td>{{ payout.employee }}</td>
+                <td>{{ payout.amount }} USD</td>
+                <td>{{ payout.processed_at }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No payout history available.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+*.sqlite3
+*.env
+*.pdf
+.venv/
+.__pycache__/

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">Payroll Management System</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Employee Profile</h3>
+                    <p class="card-text">View your available funds, request history, and create new payout requests.</p>
+                    <a href="{% url 'profile' %}" class="btn btn-primary">My Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Payout Requests</h3>
+                    <p class="card-text">View all current payout requests and process them if you're an accountant.</p>
+                    <a href="{% url 'payout_request_list' %}" class="btn btn-success">Payout Requests</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

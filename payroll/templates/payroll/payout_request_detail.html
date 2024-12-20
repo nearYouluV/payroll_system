@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Payout Request Details{% endblock %}
+
+{% block content %}
+    <h1>Payout Request Details</h1>
+    <table class="table">
+        <tr>
+            <th>Employee</th>
+            <td>{{ payout_request.employee }}</td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td>{{ payout_request.amount }} USD</td>
+        </tr>
+        <tr>
+            <th>Requested At</th>
+            <td>{{ payout_request.requested_at }}</td>
+        </tr>
+        <tr>
+            <th>Processed</th>
+            <td>{{ payout_request.is_processed|yesno:"Yes,No" }}</td>
+        </tr>
+    </table>
+{% endblock %}
