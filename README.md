@@ -1,4 +1,10 @@
 # Payroll Management System
+---
+
+## Overview
+The Payroll Management System is a Django-based application designed to handle employee management, payroll, and payout processes. It includes custom user registration, payout request handling, and group-based access controls to ensure secure and efficient operations.
+
+---
 
 ## Navigation
 - [Overview](#overview)
@@ -16,11 +22,6 @@
 - [License](#license)
 - [Contact](#contact)
 - [Running with Docker](#running-with-docker)
-
----
-
-## Overview
-The Payroll Management System is a Django-based application designed to handle employee management, payroll, and payout processes. It includes custom user registration, payout request handling, and group-based access controls to ensure secure and efficient operations.
 
 ---
 
